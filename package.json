@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": { "node": ">=22.17" },
   "workspaces": ["packages/*"],
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "dev:site": "vite --config site/vite.config.ts",
+    "build:vercel": "SITE_BASE=/ npm run build:site",
     "build:site": "tsc -p site/tsconfig.json && vite build --config site/vite.config.ts",
     "preview:site": "vite preview --config site/vite.config.ts",
     "screenshots": "node tools/capture-readme-screenshots.mjs",

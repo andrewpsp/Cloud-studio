@@ -7,9 +7,12 @@ import { packProjectAvatar } from '../packages/runtime/src/format/project-archiv
 import { readAvatarFolder } from '../tools/avatar-files.mjs';
 
 const fromHere = (path: string) => fileURLToPath(new URL(path, import.meta.url));
-const base = '/mesh-avatar-studio/';
+// Override for hosts that serve from the domain root (e.g. Vercel: SITE_BASE=/).
+const base = process.env.SITE_BASE ?? '/mesh-avatar-studio/';
 const avatarFile = 'miko.mavatar';
-const publishedUrl = `https://shinshin86.github.io${base}`;
+const publishedUrl = process.env.SITE_ORIGIN
+  ? new URL(base, process.env.SITE_ORIGIN).href
+  : `https://shinshin86.github.io${base}`;
 
 function socialImage(): Plugin {
   return {
